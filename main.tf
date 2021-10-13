@@ -24,6 +24,7 @@ resource "aws_subnet" "subnet1-public" {
     cidr_block = "${var.public_subnet1_cidr}"
     availability_zone = "us-east-1a"
     map_public_ip_on_launch = true
+    private_ips = ["192.168.1.200"]
 
     tags = {
         Name = "${var.public_subnet1_name}"
@@ -103,7 +104,7 @@ resource "aws_instance" "web1" {
   associate_public_ip_address = true
   key_name               = "my-kp-nv-01"
   monitoring             = true
-   private_ip = "192.168.1.200"
+  private_ip = "192.168.1.200"
   subnet_id = "${aws_subnet.subnet1-public.id}"
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
   tags = {
