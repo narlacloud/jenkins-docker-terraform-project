@@ -90,18 +90,6 @@ resource "aws_security_group" "allow_all" {
     }
 }
 
-
-resource "aws_network_interface" "dockerhost" {
-  subnet_id   = "${aws_subnet.subnet1-public.id}"
-  private_ips = ["192.168.1.200"]
-
-  tags = {
-    Name = "primary_network_interface"
-  }
-}
-
-
-
 data "aws_ami" "my_ami" {
       most_recent      = true
       #name_regex       = "^chandra"
@@ -117,7 +105,7 @@ resource "aws_instance" "web1" {
   monitoring             = true
   subnet_id = "${aws_subnet.subnet1-public.id}"
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
-      private_ip = "192.168.1.200"   
+  private_ip = "192.168.1.200"   
     tags = {
     Name = "DockerHost2"
     Terraform   = "true"
