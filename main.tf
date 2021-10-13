@@ -119,8 +119,7 @@ resource "aws_instance" "web1" {
   vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
   
    network_interface {
-    network_interface_id = "${aws_network_interface.dockerhost.id}"
-    device_index         = 0
+    private_ip = "192.168.1.200"   
   }
 
 
